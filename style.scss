@@ -1,0 +1,509 @@
+//Color Variables
+//neutral
+$neutral-900: hsl(33, 15%, 15%);
+$neutral-800: hsl(33, 22%, 20%);
+$neutral-700: hsl(32, 20%, 29%);
+$neutral-600: hsl(33, 17%, 41%);
+$neutral-400: hsl(36, 22%, 86%);
+$neutral-200: hsl(30, 24%, 93%);
+$neutral-100: hsl(35, 60%, 96%);
+$neutral-50: hsl(40, 60%, 98%);
+$neutral-0: hsl(0, 0%, 100%);
+//sun
+$Sun-500: hsl(42, 83%, 58%);
+$Sun-300: hsl(44, 84%, 75%);
+$Sun-200: hsl(45, 100%, 74%);
+$Sun-50: hsl(41, 100%, 93%);
+
+//Terracotta
+$Terracotta-700: hsl(15, 69%, 37%);
+$Terracotta-600: hsl(15, 74%, 41%);
+$Terracotta-500: hsl(18, 62%, 47%);
+$Terracotta-400: hsl(22, 72%, 56%);
+
+//Blue
+$Blue-500: hsl(230, 49%, 56%);
+
+//Rose
+$Rose-500: hsl(340, 48%, 52%);
+
+//Reset
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html{
+  font-size: 100%;
+}
+
+//attribution
+//font
+@font-face {
+  font-family: "fraunces";
+  src: url("../assets/fonts/fraunces/Fraunces-VariableFont_wght.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "fraunces";
+  src: url("../assets/fonts/fraunces/Fraunces-Italic-VariableFont_wght.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "dm-mono";
+  src: url("../assets/fonts/dm-mono/DMMono-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "dm-mono";
+  src: url("../assets/fonts/dm-mono/DMMono-Regular.ttf ") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "dm-sans";
+  src: url("../assets/fonts/dm-sans/DMSans-VariableFont_opsz,wght.ttf   ") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+//body
+body {
+  font-family: "dm-sans", sans-serif;
+  font-size: clamp(0.875rem, 1.5vw, 1rem);
+  line-height: 1.5;
+  color: $neutral-900;
+  background-color: $neutral-100;
+  min-width: 20rem;
+}
+.container{
+  display: flex;
+  min-height: 100vh;
+
+ aside{
+  min-height: 100vh;
+  width: 240px;
+  padding: 24px 16px;
+  border-right: 1px solid $neutral-600;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+
+  .ul-aside{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  list-style: none;
+  margin-top: 20px;
+  cursor:pointer;
+
+   li a{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: $neutral-900;
+  }
+}
+li:first-child{
+  background-color: $neutral-50;
+  font-size: 16px;
+  padding: 4px;
+  border-radius: 5px;
+  border: 1px solid $neutral-400;
+  .nav-badge{
+    margin-left: auto;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: $Rose-500;
+    color: $neutral-0;
+    padding: 0;
+    display: grid;
+    place-items: center;
+    line-height: 1;
+    
+  }
+ 
+}
+.sidebar-bottom{
+  display: flex;
+  flex-direction: column;
+   gap: 10px;
+   margin-top: auto;
+
+   .weather-card{
+    background-color: $Sun-200;
+    padding: 10px;
+    border-radius: 15px;
+    display: flex;
+    gap: 5px;
+    position: relative;
+    overflow: hidden;
+    .temp{
+      font-family: "fraunces", serif;
+      font-size: 28px;
+      line-height: 1.1;
+      margin-block: 4px;
+    }
+    .right-card{
+      position: absolute;
+      right: -6px;
+      top: -30px;
+      
+    }
+    .weather-label{
+      font-family: "fraunces", serif;
+      font-size: 12px;
+      line-height: 1.1;
+      margin-block: 4px;
+    }
+    .weather-description{
+      font-family: "dm-sans", sans-serif;
+      font-size: 11px;
+      
+    }
+   }
+   .hotel-address p{
+    font-family: "fraunces", serif;
+    font-size: 12px;
+    line-height: 1.2;
+    margin-block: 4px;
+   }
+}
+}
+//MAIN
+main{
+  flex: 1;
+  min-width: 0;
+  padding: 24px;
+
+   .booking-status{
+    font-family: "fraunces", serif;
+    font-size: 12px;
+    line-height: 1.2;
+    // margin-block: 4px;
+    color: $neutral-600;
+    text-transform: uppercase;
+  }
+  .main-header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+
+  .last-name{
+    font-family: "dm-mono", serif;
+    font-style: italic;
+    font-size: clamp(1.75rem, 4.5vw, 28px);
+    line-height: 1.2;
+    margin-block: 4px;
+    color: $Terracotta-400;
+  }
+  .btn-neutral, .btn-secondary{
+    border: 1px solid $neutral-600;
+    border-radius: 20px;
+    padding: 5px 10px;
+  }
+.btn-neutral{
+  background-color: $neutral-100;
+}
+.btn-secondary{
+  background-color: $neutral-900;
+  color: $neutral-0;
+}
+  h1{
+    font-family: "fraunces", serif;
+    font-size: 28px;
+    line-height: 1.2;
+    margin-block: 4px;
+  }
+  }
+
+.two-receipt{
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex: 1 1 0;
+
+
+  .receipt-card{
+    background-color: $neutral-50;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    position: relative;
+    z-index: 1;
+    transform: rotate(-6deg);
+
+    .receipt{
+     display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  font-family: "dm-mono", monospace;
+  font-size: 10px;
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+       .receipt-number {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+    }
+    table{
+      width: 100%;
+      border-collapse: collapse;
+    
+    td{
+     font-family: "dm-sans", sans-serif;
+      font-size: 12px;
+      line-height: 1.2;
+      padding-block: 2px;
+      font-weight: 500;
+      // color: $neutral-200;
+    }
+   
+      table td:last-child{
+        text-align: right;
+        width: 1%;
+        white-space: nowrap;
+        padding-left: 10px;
+      }
+      .total-row td{
+        font-weight: 700;
+        border-top: 1px solid $neutral-600;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        text-transform: uppercase;
+      }
+      .total-amount{
+        font-family: "dm-sans", monospace;
+        font-size: 14px;
+        line-height: 1.2;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+  }
+  .check{
+    display: flex;
+    justify-content: space-between;
+   
+    margin-top: 10px;
+    font-family: "fraunces", serif;
+    font-size: 12px;
+    line-height: 1.2;
+    margin-block: 4px;
+
+    .check-transform{
+      text-transform: uppercase;
+      // margin-left: 5px;
+    }
+    p{
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+    }
+    .check-date{
+      font-family: "fraunces", serif;
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-block: 4px;
+    }
+  }
+  .payment-method{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+    font-family: "fraunces", serif;
+    font-size: 12px;
+    line-height: 1.2;
+    margin-block: 4px;
+
+    img{
+      width: 100px;
+      height: auto;
+      margin-left: auto;
+    }
+  }
+  }
+   .host-card{
+    background-color: $Terracotta-500;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    position: relative;
+    z-index: 2;
+    margin-left: -15px;
+    transform: rotate(4deg);
+
+  .welcome-sun{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+      
+    h4{
+      color: $neutral-200;
+    }
+  img{
+      margin-left: auto;
+      width: 50px;
+      height: 50px;
+      
+     
+    }
+  }
+  .note{
+    color: $Sun-500;
+    font-family: "fraunces", serif;
+  }
+  .name{
+    font-family: "dm-mono", serif;
+    font-size: 30px;
+    line-height: 1.2;
+    margin-block: 4px;
+    color: $neutral-400;
+    font-weight: 700;
+    font-style: italic;
+  }
+  .host-address{
+    font-family: "fraunces", serif;
+    font-size: 14px;
+    line-height: 1.2;
+    margin-block: 4px;
+    color: $neutral-200;
+    margin-top: 10px;
+  }
+  .closing-note{
+    font-family: "fraunces", serif;
+    font-size: 12px;
+    line-height: 1.2;
+    margin-block: 4px;
+    color: $neutral-200;
+    margin-top: 30px;
+  }
+  .host-name{
+    font-family: "fraunces", serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-block: 4px;
+    color: $neutral-200;
+    margin-top: 5px;
+  }
+  }
+}
+  
+.guest-info-row{
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  
+  .network-code, .passcode{
+    display: flex;
+   background-color: $neutral-400;
+   padding: 5px;
+   margin: 10px;
+    font-family: "fraunces", serif;
+    font-size: 12px;
+    line-height: 1.2;
+    border-radius: 5px;
+
+    .password-space, .pasword-space{
+      font-family: "fraunces", serif;
+      letter-spacing: 2px;
+    }
+  }
+  .network-right, .password-right{
+    margin-left: auto;
+    font-family: "dm-sans", sans-serif;
+  }
+  .passcode button{
+    margin-left: 10px;
+    padding: 2px 6px;
+    font-size: 12px;
+    border: 1px solid $neutral-600;
+    border-radius: 5px;
+    background-color: $neutral-400;
+    // color: $neutral-0;
+    cursor: pointer;
+  }
+.wifi-card-header{
+    color: $Blue-500;
+    span img{
+      background-color: $Blue-500;
+    }
+  }
+  .arrival-card-header{
+    color: $Rose-500;
+    span img{
+      background-color: $Rose-500;
+    }
+  }
+  .breakfast-card-header{
+    color: $Terracotta-500;
+    span img{
+      background-color: $Terracotta-500;
+    }
+  }
+.arrival-card, .wifi-card, .breakfast-card{
+  border: 1px solid $neutral-400;
+  border-radius: 10px;
+  background-color: $neutral-50;
+  padding: 10px;
+  flex: 1;
+  min-width: 0;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+
+  .date, .password, .terrace{
+    font-family: "fraunces", serif;
+    font-size: 12px;
+    line-height: 1.2;
+    margin-block: 4px;
+
+  }
+  
+  .arrival-card-header, .wifi-card-header, .breakfast-card-header{
+    display: flex;
+    align-items: center;
+   
+    gap: 10px;
+    
+
+    .arrival-card-header span {
+  line-height: 1;
+}
+    img{
+      width: 20px;
+      height: 20px;
+      border-radius: 5px;
+      // background-color: $Rose-500;
+    }
+
+
+    .arrival-tag, .wifi-tag, .breakfast-tag{
+      margin-left: auto;
+      padding: 2px 6px;
+      font-size: 20px;
+      font-family: "fraunces", serif;
+      font-weight: 700;
+    }
+  }
+}
+}
+}
+
+}
