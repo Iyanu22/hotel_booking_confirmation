@@ -19,7 +19,7 @@ html {
   font-family: "fraunces";
   src: url("../assets/fonts/fraunces/Fraunces-Italic-VariableFont_wght.ttf") format("truetype");
   font-weight: 400;
-  font-style: normal;
+  font-style: italic;
   font-display: swap;
 }
 @font-face {
@@ -31,15 +31,15 @@ html {
 }
 @font-face {
   font-family: "dm-mono";
-  src: url("../assets/fonts/dm-mono/DMMono-Regular.ttf ") format("truetype");
-  font-weight: 500;
+  src: url("../assets/fonts/dm-mono/DMMono-Regular.ttf") format("truetype");
+  font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "dm-sans";
-  src: url("../assets/fonts/dm-sans/DMSans-VariableFont_opsz,wght.ttf   ") format("truetype");
-  font-weight: 700;
+  src: url("../assets/fonts/dm-sans/DMSans-VariableFont_opsz,wght.ttf") format("truetype");
+  font-weight: 400 700;
   font-style: normal;
   font-display: swap;
 }
@@ -52,386 +52,564 @@ body {
   min-width: 20rem;
 }
 
-.container {
-  display: flex;
-  min-height: 100vh;
-}
-.container aside {
-  min-height: 100vh;
-  width: 240px;
-  padding: 24px 16px;
-  border-right: 1px solid hsl(33, 17%, 41%);
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-}
-.container aside .ul-aside {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  list-style: none;
-  margin-top: 20px;
-  cursor: pointer;
-}
-.container aside .ul-aside li a {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-  color: hsl(33, 15%, 15%);
-}
-.container aside li:first-child {
-  background-color: hsl(40, 60%, 98%);
-  font-size: 16px;
-  padding: 4px;
-  border-radius: 5px;
-  border: 1px solid hsl(36, 22%, 86%);
-}
-.container aside li:first-child .nav-badge {
-  margin-left: auto;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: hsl(340, 48%, 52%);
-  color: hsl(0, 0%, 100%);
-  padding: 0;
-  display: grid;
-  place-items: center;
-  line-height: 1;
-}
-.container aside .sidebar-bottom {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-top: auto;
-}
-.container aside .sidebar-bottom .weather-card {
-  background-color: hsl(45, 100%, 74%);
-  padding: 10px;
-  border-radius: 15px;
-  display: flex;
-  gap: 5px;
-  position: relative;
+body.menu-open {
   overflow: hidden;
 }
-.container aside .sidebar-bottom .weather-card .temp {
-  font-family: "fraunces", serif;
-  font-size: 28px;
-  line-height: 1.1;
-  margin-block: 4px;
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
 }
-.container aside .sidebar-bottom .weather-card .right-card {
-  position: absolute;
-  right: -6px;
-  top: -30px;
-}
-.container aside .sidebar-bottom .weather-card .weather-label {
-  font-family: "fraunces", serif;
-  font-size: 12px;
-  line-height: 1.1;
-  margin-block: 4px;
-}
-.container aside .sidebar-bottom .weather-card .weather-description {
-  font-family: "dm-sans", sans-serif;
-  font-size: 11px;
-}
-.container aside .sidebar-bottom .hotel-address p {
-  font-family: "fraunces", serif;
-  font-size: 12px;
-  line-height: 1.2;
-  margin-block: 4px;
-}
-.container main {
-  flex: 1;
-  min-width: 0;
-  padding: 24px;
-}
-.container main .booking-status {
-  font-family: "fraunces", serif;
-  font-size: 12px;
-  line-height: 1.2;
-  color: hsl(33, 17%, 41%);
-  text-transform: uppercase;
-}
-.container main .main-header {
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 20px;
-}
-.container main .main-header .last-name {
-  font-family: "dm-mono", serif;
-  font-style: italic;
-  font-size: clamp(1.75rem, 4.5vw, 28px);
-  line-height: 1.2;
-  margin-block: 4px;
-  color: hsl(22, 72%, 56%);
-}
-.container main .main-header .btn-neutral, .container main .main-header .btn-secondary {
-  border: 1px solid hsl(33, 17%, 41%);
-  border-radius: 20px;
-  padding: 5px 10px;
-}
-.container main .main-header .btn-neutral {
+  min-height: 4rem;
+  padding-inline: 1rem;
   background-color: hsl(35, 60%, 96%);
+  border-bottom: 1px solid hsl(36, 22%, 86%);
 }
-.container main .main-header .btn-secondary {
-  background-color: hsl(33, 15%, 15%);
-  color: hsl(0, 0%, 100%);
+.topbar__logo {
+  height: 2.25rem;
+  width: auto;
 }
-.container main .main-header h1 {
-  font-family: "fraunces", serif;
-  font-size: 28px;
-  line-height: 1.2;
-  margin-block: 4px;
+
+.icon-btn {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0.5rem;
+  cursor: pointer;
 }
-.container main .two-receipt {
+.icon-btn img {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.icon-btn:focus-visible {
+  outline: 2px solid hsl(18, 62%, 47%);
+  outline-offset: 2px;
+}
+.icon-btn--bordered {
+  border: 1px solid hsl(36, 22%, 86%);
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  background-color: rgba(0, 0, 0, 0.35);
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+.overlay[hidden] {
+  display: none;
+}
+
+.layout {
+  display: block;
+}
+
+@media (min-width: 48rem) {
+  .topbar,
+  .overlay {
+    display: none;
+  }
+  .layout {
+    display: grid;
+    grid-template-columns: 14rem minmax(0, 1fr);
+    min-height: 100vh;
+  }
+}
+.sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  z-index: 40;
   display: flex;
-  justify-content: center;
-  gap: 10px;
-  flex: 1 1 0;
+  flex-direction: column;
+  width: min(85vw, 18rem);
+  height: 100dvh;
+  padding: 1.5rem 1rem;
+  overflow-y: auto;
+  background-color: hsl(35, 60%, 96%);
+  border-right: 1px solid hsl(36, 22%, 86%);
+  box-shadow: 0.5rem 0 1.5rem rgba(0, 0, 0, 0.15);
+  transform: translateX(-100%);
+  visibility: hidden;
+  transition: transform 250ms ease, visibility 250ms ease;
 }
-.container main .two-receipt .receipt-card {
+.sidebar.is-open {
+  visibility: visible;
+  transform: translateX(0);
+}
+.sidebar__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+.sidebar__logo {
+  height: 2.25rem;
+  width: auto;
+}
+.sidebar__foot {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+@media (min-width: 48rem) {
+  .sidebar {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100vh;
+    visibility: visible;
+    transform: none;
+    box-shadow: none;
+    border-right: 1px solid hsl(33, 17%, 41%);
+  }
+  .sidebar__head .icon-btn--bordered {
+    display: none;
+  }
+}
+.nav-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  margin-bottom: 1.5rem;
+}
+.nav-list a {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  color: hsl(33, 15%, 15%);
+}
+.nav-list a:hover {
   background-color: hsl(40, 60%, 98%);
-  border-radius: 10px;
-  padding: 10px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  width: 300px;
+}
+.nav-list a:focus-visible {
+  outline: 2px solid hsl(18, 62%, 47%);
+  outline-offset: 2px;
+}
+.nav-list [aria-current=page] {
+  background-color: hsl(40, 60%, 98%);
+  border: 1px solid hsl(36, 22%, 86%);
+  font-weight: 600;
+}
+.nav-list .badge {
+  margin-left: auto;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  background-color: hsl(340, 48%, 52%);
+  color: hsl(0, 0%, 100%);
+  display: grid;
+  place-items: center;
+  font-size: 0.75rem;
+  line-height: 1;
+}
+
+.weather-card {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border-radius: 15px;
+  background-color: hsl(45, 100%, 74%);
+  overflow: hidden;
+}
+.weather-card__label {
+  font-family: "fraunces", serif;
+  font-size: 0.75rem;
+}
+.weather-card__temp {
+  font-family: "fraunces", serif;
+  font-size: 1.75rem;
+  line-height: 1.1;
+  margin-block: 0.25rem;
+}
+.weather-card__desc {
+  font-size: 0.6875rem;
+}
+.weather-card__icon {
   position: relative;
   z-index: 1;
-  transform: rotate(-6deg);
+  flex-shrink: 0;
 }
-.container main .two-receipt .receipt-card .receipt {
+
+.hotel-address p {
+  font-family: "fraunces", serif;
+  font-size: 0.75rem;
+  line-height: 1.2;
+  margin-block: 0.25rem;
+  color: hsl(33, 17%, 41%);
+}
+
+.main {
+  padding: 1.25rem 1rem 3rem;
+}
+
+@media (min-width: 48rem) {
+  .main {
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+  }
+}
+.eyebrow {
+  font-family: "fraunces", serif;
+  font-size: 0.75rem;
+  color: hsl(33, 17%, 41%);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.page-header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.page-header h1 {
+  font-family: "fraunces", serif;
+  font-size: clamp(1.5rem, 5vw, 1.75rem);
+  line-height: 1.2;
+}
+.page-header__name {
+  font-family: "dm-mono", serif;
+  font-style: italic;
+  color: hsl(22, 72%, 56%);
+}
+.page-header__actions {
+  display: flex;
+  gap: 0.625rem;
+}
+
+@media (min-width: 48rem) {
+  .page-header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+.btn {
+  font: inherit;
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+.btn:focus-visible {
+  outline: 2px solid hsl(18, 62%, 47%);
+  outline-offset: 2px;
+}
+.btn--ghost {
+  background-color: hsl(35, 60%, 96%);
+  border: 1px solid hsl(33, 17%, 41%);
+}
+.btn--solid {
+  background-color: hsl(33, 15%, 15%);
+  color: hsl(0, 0%, 100%);
+  border: 1px solid hsl(33, 15%, 15%);
+}
+
+.stay-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 48rem) {
+  .stay-summary {
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0;
+  }
+}
+.receipt {
+  position: relative;
+  width: 100%;
+  padding: 1rem;
+  border-radius: 10px;
+  background-color: hsl(40, 60%, 98%);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.receipt__head {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   font-family: "dm-mono", monospace;
-  font-size: 10px;
-  line-height: 1.2;
+  font-size: 0.625rem;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
-.container main .two-receipt .receipt-card .receipt .receipt-number {
+.receipt__number {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
 }
-.container main .two-receipt .receipt-card table {
+.receipt__title {
+  font-family: "fraunces", serif;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+.receipt__dates {
+  display: flex;
+  justify-content: space-between;
+  margin-block: 0.75rem;
+  font-family: "fraunces", serif;
+  font-size: 0.75rem;
+}
+.receipt__dates > div:last-child {
+  text-align: right;
+}
+.receipt__date-label {
+  text-transform: uppercase;
+  color: hsl(33, 17%, 41%);
+}
+.receipt__date {
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin-block: 0.25rem;
+}
+.receipt__table {
   width: 100%;
   border-collapse: collapse;
+  font-size: 0.75rem;
 }
-.container main .two-receipt .receipt-card table td {
-  font-family: "dm-sans", sans-serif;
-  font-size: 12px;
-  line-height: 1.2;
-  padding-block: 2px;
+.receipt__table td {
+  padding-block: 0.25rem;
   font-weight: 500;
 }
-.container main .two-receipt .receipt-card table table td:last-child {
+.receipt__table td:last-child {
   text-align: right;
-  width: 1%;
   white-space: nowrap;
-  padding-left: 10px;
+  padding-left: 0.75rem;
 }
-.container main .two-receipt .receipt-card table .total-row td {
+.receipt__total td {
   font-weight: 700;
-  border-top: 1px solid hsl(33, 17%, 41%);
-  padding-top: 5px;
-  padding-bottom: 5px;
   text-transform: uppercase;
+  border-top: 1px solid hsl(33, 17%, 41%);
+  padding-top: 0.5rem;
 }
-.container main .two-receipt .receipt-card table .total-amount {
-  font-family: "dm-sans", monospace;
-  font-size: 14px;
-  line-height: 1.2;
+.receipt__payment {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.75rem;
+  font-family: "fraunces", serif;
+  font-size: 0.75rem;
+}
+.receipt__payment img {
+  width: 6rem;
+  height: auto;
+}
+
+.welcome-card {
+  position: relative;
+  width: 100%;
+  padding: 1rem;
+  border-radius: 10px;
+  background-color: hsl(18, 62%, 47%);
+  color: hsl(30, 24%, 93%);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.welcome-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.welcome-card__head h2 {
+  font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
-.container main .two-receipt .receipt-card .check {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
+.welcome-card__head img {
+  width: 2rem;
+  height: 2rem;
+}
+.welcome-card__note {
+  margin-top: 0.75rem;
   font-family: "fraunces", serif;
-  font-size: 12px;
-  line-height: 1.2;
-  margin-block: 4px;
-}
-.container main .two-receipt .receipt-card .check .check-transform {
-  text-transform: uppercase;
-}
-.container main .two-receipt .receipt-card .check p {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-}
-.container main .two-receipt .receipt-card .check .check-date {
-  font-family: "fraunces", serif;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 1.2;
-  margin-block: 4px;
-}
-.container main .two-receipt .receipt-card .payment-method {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 10px;
-  font-family: "fraunces", serif;
-  font-size: 12px;
-  line-height: 1.2;
-  margin-block: 4px;
-}
-.container main .two-receipt .receipt-card .payment-method img {
-  width: 100px;
-  height: auto;
-  margin-left: auto;
-}
-.container main .two-receipt .host-card {
-  background-color: hsl(18, 62%, 47%);
-  border-radius: 10px;
-  padding: 10px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  width: 300px;
-  position: relative;
-  z-index: 2;
-  margin-left: -15px;
-  transform: rotate(4deg);
-}
-.container main .two-receipt .host-card .welcome-sun {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.container main .two-receipt .host-card .welcome-sun h4 {
-  color: hsl(30, 24%, 93%);
-}
-.container main .two-receipt .host-card .welcome-sun img {
-  margin-left: auto;
-  width: 50px;
-  height: 50px;
-}
-.container main .two-receipt .host-card .note {
-  color: hsl(42, 83%, 58%);
-  font-family: "fraunces", serif;
-}
-.container main .two-receipt .host-card .name {
-  font-family: "dm-mono", serif;
-  font-size: 30px;
-  line-height: 1.2;
-  margin-block: 4px;
-  color: hsl(36, 22%, 86%);
-  font-weight: 700;
   font-style: italic;
+  color: hsl(42, 83%, 58%);
 }
-.container main .two-receipt .host-card .host-address {
-  font-family: "fraunces", serif;
-  font-size: 14px;
-  line-height: 1.2;
-  margin-block: 4px;
-  color: hsl(30, 24%, 93%);
-  margin-top: 10px;
-}
-.container main .two-receipt .host-card .closing-note {
-  font-family: "fraunces", serif;
-  font-size: 12px;
-  line-height: 1.2;
-  margin-block: 4px;
-  color: hsl(30, 24%, 93%);
-  margin-top: 30px;
-}
-.container main .two-receipt .host-card .host-name {
-  font-family: "fraunces", serif;
-  font-size: 16px;
+.welcome-card__name {
+  font-family: "dm-mono", serif;
+  font-style: italic;
   font-weight: 700;
-  line-height: 1.2;
-  margin-block: 4px;
-  color: hsl(30, 24%, 93%);
-  margin-top: 5px;
+  font-size: 1.75rem;
+  margin-top: 0.25rem;
 }
-.container main .guest-info-row {
-  display: flex;
-  gap: 10px;
-  margin-top: 20px;
-}
-.container main .guest-info-row .network-code, .container main .guest-info-row .passcode {
-  display: flex;
-  background-color: hsl(36, 22%, 86%);
-  padding: 5px;
-  margin: 10px;
+.welcome-card__message {
   font-family: "fraunces", serif;
-  font-size: 12px;
-  line-height: 1.2;
-  border-radius: 5px;
+  font-size: 0.875rem;
+  margin-top: 0.75rem;
 }
-.container main .guest-info-row .network-code .password-space, .container main .guest-info-row .network-code .pasword-space, .container main .guest-info-row .passcode .password-space, .container main .guest-info-row .passcode .pasword-space {
+.welcome-card__room {
+  margin-top: 1.5rem;
   font-family: "fraunces", serif;
-  letter-spacing: 2px;
+  font-size: 0.75rem;
 }
-.container main .guest-info-row .network-right, .container main .guest-info-row .password-right {
-  margin-left: auto;
-  font-family: "dm-sans", sans-serif;
+.welcome-card__room-name {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-top: 0.25rem;
 }
-.container main .guest-info-row .passcode button {
-  margin-left: 10px;
-  padding: 2px 6px;
-  font-size: 12px;
-  border: 1px solid hsl(33, 17%, 41%);
-  border-radius: 5px;
-  background-color: hsl(36, 22%, 86%);
-  cursor: pointer;
+
+@media (min-width: 48rem) {
+  .receipt {
+    width: 300px;
+    z-index: 1;
+    transform: rotate(-6deg);
+  }
+  .welcome-card {
+    width: 300px;
+    z-index: 2;
+    margin-left: -15px;
+    transform: rotate(4deg);
+  }
 }
-.container main .guest-info-row .wifi-card-header {
-  color: hsl(230, 49%, 56%);
+.info-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
-.container main .guest-info-row .wifi-card-header span img {
-  background-color: hsl(230, 49%, 56%);
+
+@media (min-width: 48rem) {
+  .info-grid {
+    flex-direction: row;
+  }
 }
-.container main .guest-info-row .arrival-card-header {
-  color: hsl(340, 48%, 52%);
-}
-.container main .guest-info-row .arrival-card-header span img {
-  background-color: hsl(340, 48%, 52%);
-}
-.container main .guest-info-row .breakfast-card-header {
-  color: hsl(18, 62%, 47%);
-}
-.container main .guest-info-row .breakfast-card-header span img {
-  background-color: hsl(18, 62%, 47%);
-}
-.container main .guest-info-row .arrival-card, .container main .guest-info-row .wifi-card, .container main .guest-info-row .breakfast-card {
+.info-card {
+  flex: 1;
+  min-width: 0;
+  padding: 1rem;
   border: 1px solid hsl(36, 22%, 86%);
   border-radius: 10px;
   background-color: hsl(40, 60%, 98%);
-  padding: 10px;
-  flex: 1;
-  min-width: 0;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-.container main .guest-info-row .arrival-card .date, .container main .guest-info-row .arrival-card .password, .container main .guest-info-row .arrival-card .terrace, .container main .guest-info-row .wifi-card .date, .container main .guest-info-row .wifi-card .password, .container main .guest-info-row .wifi-card .terrace, .container main .guest-info-row .breakfast-card .date, .container main .guest-info-row .breakfast-card .password, .container main .guest-info-row .breakfast-card .terrace {
-  font-family: "fraunces", serif;
-  font-size: 12px;
-  line-height: 1.2;
-  margin-block: 4px;
-}
-.container main .guest-info-row .arrival-card .arrival-card-header, .container main .guest-info-row .arrival-card .wifi-card-header, .container main .guest-info-row .arrival-card .breakfast-card-header, .container main .guest-info-row .wifi-card .arrival-card-header, .container main .guest-info-row .wifi-card .wifi-card-header, .container main .guest-info-row .wifi-card .breakfast-card-header, .container main .guest-info-row .breakfast-card .arrival-card-header, .container main .guest-info-row .breakfast-card .wifi-card-header, .container main .guest-info-row .breakfast-card .breakfast-card-header {
+.info-card__head {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 0.625rem;
+  margin-bottom: 0.75rem;
 }
-.container main .guest-info-row .arrival-card .arrival-card-header .arrival-card-header span, .container main .guest-info-row .arrival-card .wifi-card-header .arrival-card-header span, .container main .guest-info-row .arrival-card .breakfast-card-header .arrival-card-header span, .container main .guest-info-row .wifi-card .arrival-card-header .arrival-card-header span, .container main .guest-info-row .wifi-card .wifi-card-header .arrival-card-header span, .container main .guest-info-row .wifi-card .breakfast-card-header .arrival-card-header span, .container main .guest-info-row .breakfast-card .arrival-card-header .arrival-card-header span, .container main .guest-info-row .breakfast-card .wifi-card-header .arrival-card-header span, .container main .guest-info-row .breakfast-card .breakfast-card-header .arrival-card-header span {
-  line-height: 1;
+.info-card__head span:first-child {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: "fraunces", serif;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
-.container main .guest-info-row .arrival-card .arrival-card-header img, .container main .guest-info-row .arrival-card .wifi-card-header img, .container main .guest-info-row .arrival-card .breakfast-card-header img, .container main .guest-info-row .wifi-card .arrival-card-header img, .container main .guest-info-row .wifi-card .wifi-card-header img, .container main .guest-info-row .wifi-card .breakfast-card-header img, .container main .guest-info-row .breakfast-card .arrival-card-header img, .container main .guest-info-row .breakfast-card .wifi-card-header img, .container main .guest-info-row .breakfast-card .breakfast-card-header img {
-  width: 20px;
-  height: 20px;
+.info-card__head span:first-child img {
+  width: 1.25rem;
+  height: 1.25rem;
+  padding: 0.375rem;
   border-radius: 5px;
 }
-.container main .guest-info-row .arrival-card .arrival-card-header .arrival-tag, .container main .guest-info-row .arrival-card .arrival-card-header .wifi-tag, .container main .guest-info-row .arrival-card .arrival-card-header .breakfast-tag, .container main .guest-info-row .arrival-card .wifi-card-header .arrival-tag, .container main .guest-info-row .arrival-card .wifi-card-header .wifi-tag, .container main .guest-info-row .arrival-card .wifi-card-header .breakfast-tag, .container main .guest-info-row .arrival-card .breakfast-card-header .arrival-tag, .container main .guest-info-row .arrival-card .breakfast-card-header .wifi-tag, .container main .guest-info-row .arrival-card .breakfast-card-header .breakfast-tag, .container main .guest-info-row .wifi-card .arrival-card-header .arrival-tag, .container main .guest-info-row .wifi-card .arrival-card-header .wifi-tag, .container main .guest-info-row .wifi-card .arrival-card-header .breakfast-tag, .container main .guest-info-row .wifi-card .wifi-card-header .arrival-tag, .container main .guest-info-row .wifi-card .wifi-card-header .wifi-tag, .container main .guest-info-row .wifi-card .wifi-card-header .breakfast-tag, .container main .guest-info-row .wifi-card .breakfast-card-header .arrival-tag, .container main .guest-info-row .wifi-card .breakfast-card-header .wifi-tag, .container main .guest-info-row .wifi-card .breakfast-card-header .breakfast-tag, .container main .guest-info-row .breakfast-card .arrival-card-header .arrival-tag, .container main .guest-info-row .breakfast-card .arrival-card-header .wifi-tag, .container main .guest-info-row .breakfast-card .arrival-card-header .breakfast-tag, .container main .guest-info-row .breakfast-card .wifi-card-header .arrival-tag, .container main .guest-info-row .breakfast-card .wifi-card-header .wifi-tag, .container main .guest-info-row .breakfast-card .wifi-card-header .breakfast-tag, .container main .guest-info-row .breakfast-card .breakfast-card-header .arrival-tag, .container main .guest-info-row .breakfast-card .breakfast-card-header .wifi-tag, .container main .guest-info-row .breakfast-card .breakfast-card-header .breakfast-tag {
+.info-card__tag {
   margin-left: auto;
-  padding: 2px 6px;
-  font-size: 20px;
   font-family: "fraunces", serif;
+  font-size: 1.25rem;
   font-weight: 700;
+}
+.info-card__meta {
+  font-family: "fraunces", serif;
+  font-size: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+.info-card h3 {
+  margin-bottom: 0.25rem;
+}
+.info-card--arrival .info-card__head,
+.info-card--arrival .info-card__tag {
+  color: hsl(340, 48%, 52%);
+}
+.info-card--arrival img {
+  background-color: hsl(340, 48%, 52%);
+}
+.info-card--wifi .info-card__head,
+.info-card--wifi .info-card__tag {
+  color: hsl(230, 49%, 56%);
+}
+.info-card--wifi img {
+  background-color: hsl(230, 49%, 56%);
+}
+.info-card--breakfast .info-card__head,
+.info-card--breakfast .info-card__tag {
+  color: hsl(18, 62%, 47%);
+}
+.info-card--breakfast img {
+  background-color: hsl(18, 62%, 47%);
+}
+
+.wifi-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+.wifi-details div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: hsl(36, 22%, 86%);
+  padding: 0.5rem;
+  border-radius: 5px;
+}
+.wifi-details dt {
+  font-family: "fraunces", serif;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+}
+.wifi-details dd {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: "dm-sans", sans-serif;
+}
+
+.copy-btn {
+  font: inherit;
+  padding: 0.125rem 0.5rem;
+  font-size: 0.75rem;
+  border: 1px solid hsl(33, 17%, 41%);
+  border-radius: 5px;
+  background-color: hsl(40, 60%, 98%);
+  cursor: pointer;
+}
+.copy-btn:focus-visible {
+  outline: 2px solid hsl(18, 62%, 47%);
+  outline-offset: 2px;
+}
+
+.attribution {
+  padding: 1rem;
+  font-size: 0.6875rem;
+  text-align: center;
+}
+.attribution a {
+  color: hsl(228, 45%, 44%);
 }
 
 /*# sourceMappingURL=style.css.map */
