@@ -249,9 +249,11 @@ body.menu-open {
   font-size: 0.6875rem;
 }
 .weather-card__icon {
-  position: relative;
-  z-index: 1;
-  flex-shrink: 0;
+  position: absolute;
+  right: -20px;
+  top: -30px;
+  width: 80px;
+  height: 80px;
 }
 
 .hotel-address p {
@@ -367,12 +369,12 @@ body.menu-open {
 .receipt__title {
   font-family: "fraunces", serif;
   font-size: 1rem;
-  margin-top: 0.5rem;
+  margin-top: 0.2rem;
 }
 .receipt__dates {
   display: flex;
   justify-content: space-between;
-  margin-block: 0.75rem;
+  margin-block: 0.2rem;
   font-family: "fraunces", serif;
   font-size: 0.75rem;
 }
@@ -386,7 +388,7 @@ body.menu-open {
 .receipt__date {
   font-size: 1.125rem;
   font-weight: 700;
-  margin-block: 0.25rem;
+  margin-block: 0.2rem;
 }
 .receipt__table {
   width: 100%;
@@ -394,13 +396,13 @@ body.menu-open {
   font-size: 0.75rem;
 }
 .receipt__table td {
-  padding-block: 0.25rem;
+  padding-block: 0.15rem;
   font-weight: 500;
 }
 .receipt__table td:last-child {
   text-align: right;
   white-space: nowrap;
-  padding-left: 0.75rem;
+  padding-left: 0.5rem;
 }
 .receipt__total td {
   font-weight: 700;
@@ -412,7 +414,7 @@ body.menu-open {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 0.75rem;
+  margin-top: 0.3rem;
   font-family: "fraunces", serif;
   font-size: 0.75rem;
 }
@@ -482,7 +484,7 @@ body.menu-open {
   .welcome-card {
     width: 300px;
     z-index: 2;
-    margin-left: -15px;
+    margin-left: 5px;
     transform: rotate(4deg);
   }
 }

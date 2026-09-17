@@ -1,6 +1,6 @@
 # Frontend Mentor - Hotel booking confirmation page solution
 
-This is a solution to the [Hotel booking confirmation page challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/hotel-booking-confirmation-page). Frontend Mentor challenges help you improve your coding skills by building realistic projects. 
+This is a solution to the [Hotel booking confirmation page challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/hotel-booking-confirmation-page). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
 
 ## Table of contents
 
@@ -12,12 +12,8 @@ This is a solution to the [Hotel booking confirmation page challenge on Frontend
   - [Built with](#built-with)
   - [What I learned](#what-i-learned)
   - [Continued development](#continued-development)
-  - [Useful resources](#useful-resources)
   - [AI Collaboration](#ai-collaboration)
 - [Author](#author)
-- [Acknowledgments](#acknowledgments)
-
-**Note: Delete this note and update the table of contents based on what sections you keep.**
 
 ## Overview
 
@@ -27,98 +23,84 @@ Users should be able to:
 
 - View the optimal layout for the interface depending on their device's screen size
 - See hover and focus states for all interactive elements on the page
-- Open and close the navigation menu on smaller screens (optional JavaScript)
-- Copy the Wi-Fi password to their clipboard using the copy button (optional JavaScript)
+- Open and close the navigation menu on smaller screens
+- Copy the Wi-Fi password to their clipboard using the copy button
 
 ### Screenshot
 
 ![](./screenshot.jpg)
 
-Add a screenshot of your solution. The easiest way to do this is to use Firefox to view your project, right-click the page and select "Take a Screenshot". You can choose either a full-height screenshot or a cropped one based on how long the page is. If it's very long, it might be best to crop it.
-
-Alternatively, you can use a tool like [FireShot](https://getfireshot.com/) to take the screenshot. FireShot has a free option, so you don't need to purchase it. 
-
-Then crop/optimize/edit your image however you like, add it to your project, and update the file path in the image above.
-
-**Note: Delete this note and the paragraphs above when you add your screenshot. If you prefer not to add a screenshot, feel free to remove this entire section.**
-
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Solution URL: [Add your Frontend Mentor solution URL here]
+- Live Site URL: [Add your deployed URL here]
 
 ## My process
 
 ### Built with
 
 - Semantic HTML5 markup
-- CSS custom properties
-- Flexbox
-- CSS Grid
+- SCSS (variables, nesting, `@media` queries) compiled to CSS
+- Flexbox for component-level layout
+- CSS Grid for the desktop sidebar/main-content shell
 - Mobile-first workflow
-- [React](https://reactjs.org/) - JS library
-- [Next.js](https://nextjs.org/) - React framework
-- [Styled Components](https://styled-components.com/) - For styles
-
-**Note: These are just examples. Delete this note and replace the list above with your own choices**
+- Vanilla JavaScript — menu open/close state, keyboard support, and the Clipboard API for the Wi-Fi password copy button
 
 ### What I learned
 
-Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
+I started by building this for desktop only, then went back to make it responsive — and that order caused most of the real bugs, so it's the main thing I'm taking away.
 
-To see how you can add code snippets, see below:
+**Nested SCSS selectors compile to descendant selectors by default.** I had markup like `<aside class="sidebar" id="sidebar">`, where `sidebar` is a class on the element itself — but my SCSS nested `.sidebar` *inside* an `aside { }` block, which compiles to `.container aside .sidebar`. That selector requires `.sidebar` to be a *child* of `aside`, not the same element, so it silently matched nothing. The fixed positioning, slide-in transform, and `.is-open` toggle never applied, and there was no error anywhere — the styles just didn't exist. Retrofitting mobile behaviour onto desktop-first SCSS made this easy to miss, because the base (desktop) rules still rendered fine and hid the problem:
 
-```html
-<h1>Some HTML code I'm proud of</h1>
-```
-```css
-.proud-of-this-css {
-  color: papayawhip;
+```scss
+// Before — never matches anything, because .sidebar IS the <aside>, not a descendant of it
+aside {
+  .sidebar {
+    position: fixed;
+    transform: translateX(-100%);
+  }
+}
+
+// After — matches the element directly
+aside.sidebar {
+  position: fixed;
+  transform: translateX(-100%);
 }
 ```
-```js
-const proudOfThisFunc = () => {
-  console.log('🎉')
+
+**The `&` symbol matters more than I realized.** `&` stands in for the parent selector with no space, which is required for modifier classes, pseudo-classes, and JS-toggled state classes:
+
+```scss
+.sidebar {
+  &.is-open { transform: translateX(0); } // compiles to .sidebar.is-open — same element
 }
 ```
 
-If you want more help with writing markdown, we'd recommend checking out [The Markdown Guide](https://www.markdownguide.org/) to learn more.
+Without `&`, that would compile to `.sidebar .is-open` — a descendant with a different class — which is the exact same category of bug as the one above.
 
-**Note: Delete this note and the content within this section and replace with your own learnings.**
+**Rebuilding mobile-first instead of retrofitting fixed the root cause, not just the symptom.** Writing base styles for the smallest screen first and adding complexity at `min-width: 48rem` meant every rule had an obvious, single place it belonged, so there was no more guessing about how deep to nest something.
+
+**Naming conventions prevent this class of bug.** Switching to BEM-style names (`.receipt__title`, `.info-card--wifi`) meant every class name encodes its own place in the hierarchy, so it's much harder to accidentally nest something one level too deep without noticing.
+
+**Accessibility is cheap to build in, expensive to retrofit.** Adding `aria-expanded`, `aria-hidden`, `:focus-visible` outlines, an `Escape`-to-close handler, and focus management (moving focus into the menu on open, back to the trigger on close) took very little extra code once the component structure was already right — but would have meant re-touching every interactive element if I'd added it after the fact.
 
 ### Continued development
 
-Use this section to outline areas that you want to continue focusing on in future projects. These could be concepts you're still not completely comfortable with or techniques you found useful that you want to refine and perfect.
-
-**Note: Delete this note and the content within this section and replace with your own plans for continued development.**
-
-### Useful resources
-
-- [Example resource 1](https://www.example.com) - This helped me for XYZ reason. I really liked this pattern and will use it going forward.
-- [Example resource 2](https://www.example.com) - This is an amazing article which helped me finally understand XYZ. I'd recommend it to anyone still learning this concept.
-
-**Note: Delete this note and replace the list above with resources that helped you during the challenge. These could come in handy for anyone viewing your solution or for yourself when you look back on this project in the future.**
+- Test the responsive breakpoints on real devices, not just by resizing a desktop browser window — the in-between widths are where layout bugs like the one above tend to hide.
+- Add a `prefers-reduced-motion` check for anyone with that OS setting on, so the slide-in menu animation doesn't play for them.
+- Try rebuilding this same challenge in React/Next.js — my usual stack — to compare how much of the accessibility work (focus trapping, `aria-*` sync) a component model handles for free versus by hand.
+- Get more disciplined about compiling and opening the page after every meaningful SCSS change, rather than at the end of a session — that's what let the sidebar bug sit unnoticed for a while.
 
 ### AI Collaboration
 
-Describe how you used AI tools (if any) during this project. This helps demonstrate your ability to work effectively with AI assistants.
+I used Claude (Anthropic) throughout this build, in a few distinct ways:
 
-- What tools did you use (e.g., ChatGPT, Claude, GitHub Copilot)?
-- How did you use them (e.g., debugging, generating boilerplate, brainstorming solutions)?
-- What worked well? What didn't?
+- **Debugging**: I pasted my existing HTML/SCSS/JS and asked what was wrong. Claude traced the mobile menu failure back to the SCSS nesting issue described above, rather than just patching the symptom, and explained *why* the selector didn't match instead of only handing me a fix.
 
-**Note: Delete this note and the content above if you didn't use AI, or replace with your own experience.**
+What worked well: getting a direct explanation of *why* something broke, not just a corrected file — that's what let me apply the same fix pattern (checking whether a nested selector's DOM assumption actually matches the markup) on my own afterward.
+
+What I'd do differently: I gave Claude the finished mobile/desktop mockups partway through rather than at the start, which meant an earlier debugging pass was working from an incomplete picture of the target design. 
 
 ## Author
 
-- Website - [Add your name here](https://www.your-site.com)
-- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/yourusername)
-- Twitter - [@yourusername](https://www.twitter.com/yourusername)
-
-**Note: Delete this note and add/remove/edit lines above based on what links you'd like to share.**
-
-## Acknowledgments
-
-This is where you can give a hat tip to anyone who helped you out on this project. Perhaps you worked in a team or got some inspiration from someone else's solution. This is the perfect place to give them some credit.
-
-**Note: Delete this note and edit this section's content as necessary. If you completed this challenge by yourself, feel free to delete this section entirely.**
+- Frontend Mentor - [@Iyanuoluwa](https://www.frontendmentor.io/profile/Iyanuoluwa) *(update with your actual username)*
