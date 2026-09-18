@@ -314,6 +314,7 @@ body.menu-open {
   border-radius: 20px;
   padding: 0.5rem 1rem;
   cursor: pointer;
+  transition: background-color 150ms ease, border-color 150ms ease;
 }
 .btn:focus-visible {
   outline: 2px solid hsl(18, 62%, 47%);
@@ -323,10 +324,18 @@ body.menu-open {
   background-color: hsl(35, 60%, 96%);
   border: 1px solid hsl(33, 17%, 41%);
 }
+.btn--ghost:hover {
+  background-color: hsl(30, 24%, 93%);
+  border-color: hsl(33, 15%, 15%);
+}
 .btn--solid {
   background-color: hsl(33, 15%, 15%);
   color: hsl(0, 0%, 100%);
   border: 1px solid hsl(33, 15%, 15%);
+}
+.btn--solid:hover {
+  background-color: hsl(33, 22%, 20%);
+  border-color: hsl(33, 22%, 20%);
 }
 
 .stay-summary {
@@ -342,6 +351,20 @@ body.menu-open {
     justify-content: center;
     align-items: flex-start;
     gap: 0;
+  }
+  .receipt,
+  .welcome-card {
+    width: clamp(220px, 45%, 300px);
+    flex-shrink: 1;
+  }
+  .receipt {
+    z-index: 1;
+    transform: rotate(-6deg);
+  }
+  .welcome-card {
+    z-index: 2;
+    margin-left: -15px;
+    transform: rotate(4deg);
   }
 }
 .receipt {
@@ -603,15 +626,6 @@ body.menu-open {
 .copy-btn:focus-visible {
   outline: 2px solid hsl(18, 62%, 47%);
   outline-offset: 2px;
-}
-
-.attribution {
-  padding: 1rem;
-  font-size: 0.6875rem;
-  text-align: center;
-}
-.attribution a {
-  color: hsl(228, 45%, 44%);
 }
 
 /*# sourceMappingURL=style.css.map */

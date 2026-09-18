@@ -11,18 +11,18 @@ $neutral-100: hsl(35, 60%, 96%);
 $neutral-50:  hsl(40, 60%, 98%);
 $neutral-0:   hsl(0, 0%, 100%);
 
-$Sun-500: hsl(42, 83%, 58%);
-$Sun-300: hsl(44, 84%, 75%);
-$Sun-200: hsl(45, 100%, 74%);
-$Sun-50:  hsl(41, 100%, 93%);
+$sun-500: hsl(42, 83%, 58%);
+$sun-300: hsl(44, 84%, 75%);
+$sun-200: hsl(45, 100%, 74%);
+$sun-50:  hsl(41, 100%, 93%);
 
-$Terracotta-700: hsl(15, 69%, 37%);
-$Terracotta-600: hsl(15, 74%, 41%);
-$Terracotta-500: hsl(18, 62%, 47%);
-$Terracotta-400: hsl(22, 72%, 56%);
+$terracotta-700: hsl(15, 69%, 37%);
+$terracotta-600: hsl(15, 74%, 41%);
+$terracotta-500: hsl(18, 62%, 47%);
+$terracotta-400: hsl(22, 72%, 56%);
 
-$Blue-500: hsl(230, 49%, 56%);
-$Rose-500: hsl(340, 48%, 52%);
+$blue-500: hsl(230, 49%, 56%);
+$rose-500: hsl(340, 48%, 52%);
 
 $breakpoint-desktop: 48rem;
 
@@ -133,7 +133,7 @@ body.menu-open {
   }
 
   &:focus-visible {
-    outline: 2px solid $Terracotta-500;
+    outline: 2px solid $terracotta-500;
     outline-offset: 2px;
   }
 
@@ -261,7 +261,7 @@ body.menu-open {
     }
 
     &:focus-visible {
-      outline: 2px solid $Terracotta-500;
+      outline: 2px solid $terracotta-500;
       outline-offset: 2px;
     }
   }
@@ -277,7 +277,7 @@ body.menu-open {
     width: 1.25rem;
     height: 1.25rem;
     border-radius: 50%;
-    background-color: $Rose-500;
+    background-color: $rose-500;
     color: $neutral-0;
     display: grid;
     place-items: center;
@@ -294,7 +294,7 @@ body.menu-open {
   gap: 0.5rem;
   padding: 0.75rem;
   border-radius: 15px;
-  background-color: $Sun-200;
+  background-color: $sun-200;
   overflow: hidden;
 
 
@@ -368,7 +368,7 @@ body.menu-open {
   &__name {
     font-family: "dm-mono", serif;
     font-style: italic;
-    color: $Terracotta-400;
+    color: $terracotta-400;
   }
 
   &__actions {
@@ -390,21 +390,31 @@ body.menu-open {
   border-radius: 20px;
   padding: 0.5rem 1rem;
   cursor: pointer;
+   transition: background-color 150ms ease, border-color 150ms ease;
 
   &:focus-visible {
-    outline: 2px solid $Terracotta-500;
+    outline: 2px solid $terracotta-500;
     outline-offset: 2px;
   }
 
   &--ghost {
     background-color: $neutral-100;
     border: 1px solid $neutral-600;
+  
+  &:hover {
+      background-color: $neutral-200;
+      border-color: $neutral-900;
+    }
   }
-
   &--solid {
     background-color: $neutral-900;
     color: $neutral-0;
     border: 1px solid $neutral-900;
+
+    &:hover {
+      background-color: $neutral-800;
+      border-color: $neutral-800;
+    }
   }
 }
 
@@ -422,6 +432,20 @@ body.menu-open {
     justify-content: center;
     align-items: flex-start;
     gap: 0;
+  }
+    .receipt,
+  .welcome-card {
+    width: clamp(220px, 45%, 300px);
+    flex-shrink: 1;
+  }
+    .receipt {
+    z-index: 1;
+    transform: rotate(-6deg);
+  }
+  .welcome-card {
+    z-index: 2;
+    margin-left: -15px;
+    transform: rotate(4deg);
   }
 }
 
@@ -522,7 +546,7 @@ body.menu-open {
   width: 100%;
   padding: 1rem;
   border-radius: 10px;
-  background-color: $Terracotta-500;
+  background-color: $terracotta-500;
   color: $neutral-200;
   box-shadow: 0 4px 6px rgb(0 0 0 / 10%);
 
@@ -547,7 +571,7 @@ body.menu-open {
     margin-top: 0.75rem;
     font-family: "fraunces", serif;
     font-style: italic;
-    color: $Sun-500;
+    color: $sun-500;
   }
 
   &__name {
@@ -658,30 +682,30 @@ body.menu-open {
   &--arrival {
     .info-card__head,
     .info-card__tag {
-      color: $Rose-500;
+      color: $rose-500;
     }
     img {
-      background-color: $Rose-500;
+      background-color: $rose-500;
     }
   }
 
   &--wifi {
     .info-card__head,
     .info-card__tag {
-      color: $Blue-500;
+      color: $blue-500;
     }
     img {
-      background-color: $Blue-500;
+      background-color: $blue-500;
     }
   }
 
   &--breakfast {
     .info-card__head,
     .info-card__tag {
-      color: $Terracotta-500;
+      color: $terracotta-500;
     }
     img {
-      background-color: $Terracotta-500;
+      background-color: $terracotta-500;
     }
   }
 }
@@ -725,20 +749,7 @@ body.menu-open {
   cursor: pointer;
 
   &:focus-visible {
-    outline: 2px solid $Terracotta-500;
+    outline: 2px solid $terracotta-500;
     outline-offset: 2px;
-  }
-}
-
-// =========================================
-// Attribution (Frontend Mentor footer)
-// =========================================
-.attribution {
-  padding: 1rem;
-  font-size: 0.6875rem;
-  text-align: center;
-
-  a {
-    color: hsl(228, 45%, 44%);
   }
 }
